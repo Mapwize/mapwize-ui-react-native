@@ -164,7 +164,7 @@ const generateButtonContents = (
   ]
   if (devCallbackInterceptor?.shouldDisplayInformationButton?.(placeDetails)) {
     buttonContents.push({
-      id: 'mwz-informations-button',
+      id: 'mwz-information-button',
       title: lang_information(language),
       imageSrc: Icons.INFO,
       highlighted: false,

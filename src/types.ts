@@ -6,15 +6,16 @@ import type {
 } from 'mapwize-sdk-react-native'
 import type { DevCallbackInterceptor } from './devCallbackInterceptor'
 
-//TODO point to mapwize react sdk types instead
+// export enum Channel {
+//   MAP_CLICK = 1,
+//   SEARCH,
+//   MAIN_SEARCHES,
+// }
 
-export enum Channel {
-  MAP_CLICK = 1,
-  SEARCH,
-  MAIN_SEARCHES,
-}
+/**
+ * This adds the translations to the SDK Floor object
+ */
 export interface Floor extends FloorSDK {
-  number: number
   translations: Translation[]
 }
 
@@ -42,19 +43,50 @@ export interface OpeningHoursRow {
   intervals: string
 }
 
+/**
+ * The ButtonContent holds the button attributes so you can customize buttons on the fly
+ */
 export interface ButtonContent {
+  /**
+   * The id field can be used to update a specific button
+   * Here is the list of ids that are currently used
+   * [`mwz-directions-button`, `mwz-information-button`, `mwz-phone-button`, `mwz-website-button`, `mwz-share-button`]
+   */
   id: string
   title: string
+  /**
+   * The icon of the button, it is fed to an `Image` React Native component
+   */
   imageSrc: any
+  /**
+   * Whether to use a background with the mainColor or not
+   */
   highlighted: boolean
   callback: (object?: any) => void
 }
 
+/**
+ * The RowsContent holds the row attributes so you can customize buttons on the fly
+ */
 export interface RowsContent {
+  /**
+   * The id field can be used to update a specific row
+   * Here is the list of ids that are currently used
+   * [`mwz-floor-row`, `mwz-website-row`, `mwz-phone-row`, `mwz-capacity-row`, `mwz-openingHours-row`, `mwz-calendarEvents-row`]
+   */
   id: string
   title: string
+  /**
+   * The icon of the row, it is fed to an `Image` React Native component
+   */
   imageSrc: any
+  /**
+   * Whether to information or an italic gray colored text
+   */
   available: boolean
+  /**
+   * This field is used to carry the data of the rows with these ids: `mwz-openingHours-row` or `mwz-calendarEvents-row`
+   */
   data?: any
   callback?: (object?: any) => void
 }
@@ -77,7 +109,8 @@ export interface UIOptions extends MapwizeViewProps, DevCallbackInterceptor {
    */
   unit?: string
   /**
-   * Display the hour in a 24 format or not
+   * Display the hour in a 24 hour format or not
+   * Default is true if the phone uses 24 hour format
    */
   uses24?: boolean
   /**
@@ -96,7 +129,3 @@ export interface UIOptions extends MapwizeViewProps, DevCallbackInterceptor {
    */
   floorControllerHidden?: boolean
 }
-// mainColor sur la map.
-// Direction Options pictos
-
-// Les callbacks.

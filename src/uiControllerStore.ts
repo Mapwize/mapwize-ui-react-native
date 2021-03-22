@@ -41,7 +41,6 @@ import {
 } from './localizor'
 import {
   Camera,
-  Direction,
   DirectionMode,
   DirectionOptions,
   DirectionPointWrapper,
@@ -49,7 +48,6 @@ import {
   NavigationInfo,
   NavigationProp,
   Place,
-  PlaceDetails,
   Placelist,
   PlacePreview,
   Universe,
