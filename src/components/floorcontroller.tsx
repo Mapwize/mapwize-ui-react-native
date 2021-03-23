@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   ScrollView,
   StyleSheet,
@@ -34,47 +34,64 @@ const FloorController = ({
   disabled,
   onFloorSelected,
 }: FloorControllerProps) => {
+  const [contentHeight, setContentHeight] = useState<number>(250)
+  const [scrollheight, setScrollheight] = useState<number>(250)
+  const scrollView: React.RefObject<ScrollView | undefined> = useRef()
+  useEffect(() => {
+    if (contentHeight > scrollheight) {
+      const ratio = (selectedFloor + 1) / floors.length
+      const scrollTo = contentHeight - contentHeight * ratio
+      scrollView?.current?.scrollTo?.({ y: scrollTo })
+    }
+  }, [scrollheight, contentHeight, selectedFloor, floors])
   if (disabled) {
     return <></>
   }
   const reversedFloors = [...floors].reverse()
   return (
     <ScrollView
+      ref={scrollView}
       style={[style, {}]}
-      contentContainerStyle={{
-        padding: 8,
-        flexGrow: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-      }}
+      contentContainerStyle={styles.container}
       showsVerticalScrollIndicator={false}
+      onLayout={(evt) => {
+        const { height } = evt.nativeEvent.layout
+        setScrollheight(height)
+      }}
     >
-      {reversedFloors &&
-        reversedFloors.map((floor) => (
-          <TouchableHighlight
-            style={[
-              styles.floorItem,
-              floor.number === selectedFloor && {
-                backgroundColor: mainColor,
-              },
-            ]}
-            underlayColor={mainColor}
-            activeOpacity={0.3}
-            key={floor.number}
-            onPress={() =>
-              floor.number !== undefined && onFloorSelected(floor.number)
-            }
-          >
-            <Text
+      <View
+        onLayout={(evt) => {
+          const { height } = evt.nativeEvent.layout
+          setContentHeight(height)
+        }}
+      >
+        {reversedFloors &&
+          reversedFloors.map((floor) => (
+            <TouchableHighlight
               style={[
-                styles.floorText,
-                floor.number === selectedFloor && styles.floorTextSelected,
+                styles.floorItem,
+                floor.number === selectedFloor && {
+                  backgroundColor: mainColor,
+                },
               ]}
+              underlayColor={mainColor}
+              activeOpacity={0.3}
+              key={floor.number}
+              onPress={() =>
+                floor.number !== undefined && onFloorSelected(floor.number)
+              }
             >
-              {floor.title}
-            </Text>
-          </TouchableHighlight>
-        ))}
+              <Text
+                style={[
+                  styles.floorText,
+                  floor.number === selectedFloor && styles.floorTextSelected,
+                ]}
+              >
+                {floor.title}
+              </Text>
+            </TouchableHighlight>
+          ))}
+      </View>
     </ScrollView>
   )
 }
@@ -96,6 +113,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 0,
     elevation: 2,
+  },
+  container: {
+    padding: 8,
+    flexGrow: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
   },
   floorItemSelected: {
     backgroundColor: '#c51596',
