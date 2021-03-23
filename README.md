@@ -7,11 +7,11 @@ This library provides developers with a fully featured and ready to use UI to ad
 MapwizeUI has the following PeerDependencies, you have to include them in order to get MapwizeUI working
 
 ```json
-    "mapwize-sdk-react-native": "^1.1.1"
+    "mapwize-sdk-react-native": "^1.1.2",
     "react-native-webview": "^11.2.4",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-localize": "^2.0.2",
-    "react-native-canvas": "^0.1.37"
+    "react-native-canvas": "^0.1.37",
 ```
 
 You can install everything by running the following command
