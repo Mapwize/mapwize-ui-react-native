@@ -1,6 +1,6 @@
 {
   "name": "mapwize-ui-react-native",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "Fully featured and ready to use UI to add Mapwize Indoor Maps and Navigation in your React Native app.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
