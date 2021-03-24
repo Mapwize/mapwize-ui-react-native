@@ -115,7 +115,7 @@ const buildList = (
     grouped[u._id] = []
   })
   results?.forEach((r) => {
-    ;(r as any).universes.forEach((u: any) => {
+    ;(r as any).universes?.forEach((u: any) => {
       if (grouped[u._id]) {
         grouped[u._id].push(r)
       }

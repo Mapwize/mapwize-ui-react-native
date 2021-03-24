@@ -21,7 +21,7 @@ const SearchResultItem = ({ result, onClick }: SearchResultItemProps) => {
         <View style={styles.container}>
           <Image
             style={[styles.icon]}
-            source={{ uri: result?.cache?.['30'] }}
+            source={{ uri: result?.cache?.['30'] || result?.icon }}
           />
           <View style={styles.textContainer}>
             <Text style={styles.itemTitle}>{result.title}</Text>
