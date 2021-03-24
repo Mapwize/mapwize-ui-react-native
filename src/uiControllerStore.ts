@@ -640,7 +640,7 @@ export class UIControllerStore {
 
     const searchParams = {
       query,
-      objectClasses: ['place', 'placelist'],
+      objectClasses: ['place', 'placeList'],
       universeId: this.state.universeSelectorState.selectedUniverse?._id,
       venueId: this.state.uiControllerState.venue?._id,
     }
