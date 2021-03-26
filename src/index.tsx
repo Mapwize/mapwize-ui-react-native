@@ -1,4 +1,4 @@
-import MapwizeUI from './mapwize-ui'
+import MapwizeUI from './uiController'
 
 export * from './types'
 export { MapwizeUI as default }
