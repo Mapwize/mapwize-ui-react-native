@@ -46,6 +46,19 @@ allprojects {
 }
 ```
 
+## Description
+
+The Mapwize UI for React Native comes with the following components:
+
+- Mapwize React Native SDK
+- Floor controller
+- Follow user button
+- Search module
+- Direction module
+- Place selection
+- Universes button
+- Languages button
+
 ## The UI API
 
 The map UI implements a `UIOptions` interface, this interface provides the same props as the SDK `MapwizeMap`, adds the `DevCallbackInterceptor` and implements the following properties:
