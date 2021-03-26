@@ -64,7 +64,7 @@ export interface DevCallbackInterceptor {
 
 const defaultCallbackInterceptor: DevCallbackInterceptor = {
   onUiReady: (mapwizeViewRef: MapwizeViewRef) => {
-    console.log('onUiReady')
+    // console.log('onUiReady')
   },
   onDirectionWillStart: (
     venue: Venue,
@@ -74,14 +74,14 @@ const defaultCallbackInterceptor: DevCallbackInterceptor = {
     mode: DirectionMode,
     isNavigation: boolean
   ) => {
-    console.log(
-      'onDirectionWillStart'
-      // venue,
-      // universe,
-      // from,
-      // to,
-      // mode,
-    )
+    // console.log(
+    //   'onDirectionWillStart'
+    //   // venue,
+    //   // universe,
+    //   // from,
+    //   // to,
+    //   // mode,
+    // )
     return Promise.resolve(undefined)
   },
   onNavigationRequested: (
@@ -89,12 +89,12 @@ const defaultCallbackInterceptor: DevCallbackInterceptor = {
     universe: Universe,
     navigationProp: NavigationProp
   ) => {
-    console.log(
-      'onNavigationRequested'
-      // venue,
-      // universe,
-      // navigationProp,
-    )
+    // console.log(
+    //   'onNavigationRequested'
+    //   // venue,
+    //   // universe,
+    //   // navigationProp,
+    // )
     return undefined
   },
   shouldDisplayInformationButton: (placeDetails: FormattedPlaceDetails) => {
@@ -102,11 +102,14 @@ const defaultCallbackInterceptor: DevCallbackInterceptor = {
     return true
   },
   onInformationButtonClick: (mapwizeObject: MapwizeObject) => {
-    console.log('onInformationButtonClick') //, mapwizeObject);
+    // console.log('onInformationButtonClick') //, mapwizeObject);
   },
-  onMenuButtonClick: () => console.log('onMenuButtonClick'),
-  onFollowUserButtonClickWithoutLocation: () =>
-    console.log('onFollowUserButtonClickWithoutLocation'),
+  onMenuButtonClick: () => {
+    // console.log('onMenuButtonClick')
+  },
+  onFollowUserButtonClickWithoutLocation: () => {
+    // console.log('onFollowUserButtonClickWithoutLocation')
+  },
   /**
    * Called before displaying the details view. You can use this method to change the content of the view on the fly.
    */
@@ -115,7 +118,7 @@ const defaultCallbackInterceptor: DevCallbackInterceptor = {
     rowsContents: RowsContent[],
     buttonsContents: ButtonContent[]
   ) => {
-    console.log('onPlaceSelected') //, placeDetails, rowsContents, buttonsContents);
+    // console.log('onPlaceSelected') //, placeDetails, rowsContents, buttonsContents);
   },
 }
 

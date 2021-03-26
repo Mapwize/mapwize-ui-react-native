@@ -13,7 +13,6 @@ import UIController from './uiController'
 import type { UIOptions } from './types'
 
 const MapwizeUI = (props: UIOptions) => {
-  // TODO set mainColor on Android
   return (
     <>
       <UIController {...props} />
