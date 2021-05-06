@@ -15,12 +15,10 @@ import MapwizeMap, {
   PlacePreview,
   MarkerProp,
   Placelist,
-  PlaceStyleProp,
   DirectionProp,
   NavigationProp,
   DirectionPointWrapper,
   Direction,
-  Camera,
   NavigationInfo,
 } from 'mapwize-sdk-react-native'
 import { Linking, Share } from 'react-native'
@@ -57,25 +55,18 @@ import {
 import { StyleSheet, View } from 'react-native'
 import { ApiService } from './apiService'
 import { Floor, SearchResult, UIOptions } from './types'
-import {
-  buildDirectionInfo,
-  buildPlaceDetails,
-  titleForLanguage,
-} from './formatter'
+import { buildPlaceDetails } from './formatter'
 import {
   lang_back,
   lang_change_language,
   lang_change_universe,
   lang_choose_destination,
   lang_choose_starting_point,
-  lang_coordinates,
   lang_direction,
   lang_floor_controller,
   lang_menu,
   lang_search_global,
   lang_search_no_results,
-  lang_zoom_in,
-  lang_zoom_out,
 } from './localizor'
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context'
 import RGBColor from 'rgbcolor'
@@ -108,6 +99,9 @@ export default class UIController extends React.Component<
     super(props)
     this.uiOptions = { ...defaultOptions, ...props }
     this.uiOptions.mainColor = new RGBColor(this.uiOptions.mainColor).toHex()
+    if (props.mapOptions.mainColor === undefined) {
+      props.mapOptions.mainColor = this.uiOptions.mainColor
+    }
     this.callbackInterceptor = buildCallbackInterceptor(
       props as DevCallbackInterceptor
     )
@@ -117,8 +111,6 @@ export default class UIController extends React.Component<
       mapwizeApi
     )
     this.state = buildDefaultState(this.uiOptions)
-    //TODO add size observer for multiple screen compatibility
-    //observeChange(this.mapwizeMap?, this.uiContainer, options.sizeBreakPoint)//
   }
   componentDidMount() {
     configureStateFromApi(
@@ -159,20 +151,6 @@ export default class UIController extends React.Component<
       this.store?.startNavigationFromProps(nextProps.mapNavigation)
       return false
     }
-
-    // if (
-    //   nextProps.markers !== this.props.markers &&
-    //   nextProps.markers !== this.state.mapwizeMapState.markers
-    // ) {
-    //   console.log('nextProps.markers', nextProps.markers);
-    //   this.setState({
-    //     mapwizeMapState: {
-    //       ...this.state.mapwizeMapState,
-    //       markers: nextProps.markers,
-    //     },
-    //   });
-    //   return true;
-    // }
     return true
   }
   renderState(oldState: MapwizeUIState, newState: MapwizeUIState) {
@@ -190,8 +168,6 @@ export default class UIController extends React.Component<
     this.setState({ mapwizeMapState: newState })
   }
   render() {
-    //TODO add onLanguagesChange
-    //TODO use this.props.apiKey
     return (
       <SafeAreaProvider>
         <MapwizeMap
@@ -254,10 +230,6 @@ export default class UIController extends React.Component<
             this.props.onUniversesChange?.(universes)
             this.store?.changeUniverses(universes)
           }}
-          onUniverseWillChange={(universe: Universe) => {
-            this.props.onUniverseWillChange?.(universe)
-            this.store?.loadUniverse(universe)
-          }}
           onUniverseChange={(universe: Universe) => {
             this.props.onUniverseChange?.(universe)
             this.store?.changeUniverse(universe)
@@ -282,7 +254,6 @@ export default class UIController extends React.Component<
           onMapClick={(clickEvent: ClickEvent) => {
             this.props.onMapClick?.(clickEvent)
             switch (clickEvent.eventType) {
-              //TODO Add Marker click
               case 'map_click':
                 this.store?.onMapClick({
                   latitude: clickEvent.latLngFloor.latitude,
@@ -457,28 +428,6 @@ export default class UIController extends React.Component<
       </SafeAreaProvider>
     )
   }
-
-  // private handleMargin(state: MapwizeUIState): void {
-  //   if (
-  //     !state.bottomViewState.hidden &&
-  //     !this.uiContainer.classList.contains('mwz-small-screen')
-  //   ) {
-  //     this.mapwizeMap.setLeftMargin(400);
-  //   } else {
-  //     this.mapwizeMap.setLeftMargin(0);
-  //   }
-
-  //   if (
-  //     state.uiControllerState.status === 'inDirection' &&
-  //     this.uiContainer.classList.contains('mwz-small-screen')
-  //   ) {
-  //     this.mapwizeMap.setTopMargin(140);
-  //     this.mapwizeMap.setBottomMargin(50);
-  //   } else {
-  //     this.mapwizeMap.setTopMargin(0);
-  //     this.mapwizeMap.setBottomMargin(0);
-  //   }
-  // }
 }
 
 export interface UIControllerState {
@@ -702,7 +651,6 @@ const styles = StyleSheet.create({
   followUserButton: {
     elevation: 6,
     zIndex: 6,
-    //marginBottom: 32,
     alignSelf: 'flex-end',
   },
   searchContainer: {
@@ -713,11 +661,8 @@ const styles = StyleSheet.create({
   searchResultList: {},
   universeSelector: {
     marginRight: 8,
-    //marginBottom: 32,
   },
-  languageSelector: {
-    //marginBottom: 32,
-  },
+  languageSelector: {},
   bottomView: {},
   bottomViewVisible: {
     marginBottom: 0,

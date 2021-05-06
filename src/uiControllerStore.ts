@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/no-unlimited-disable */
-/* eslint-disable */
 import produce from 'immer'
 import type { WritableDraft } from 'immer/dist/internal'
 
@@ -640,7 +638,7 @@ export class UIControllerStore {
 
     const searchParams = {
       query,
-      objectClasses: ['place', 'placelist'],
+      objectClasses: ['place', 'placeList'],
       universeId: this.state.universeSelectorState.selectedUniverse?._id,
       venueId: this.state.uiControllerState.venue?._id,
     }
@@ -693,16 +691,8 @@ export class UIControllerStore {
         this.directionSearchToQueryChange('')
       }
     } else if (this.state.uiControllerState.status === 'inToSearch') {
-      // this.devCallbackInterceptor.onSelectedChange?.(result, {
-      //   channel: 'search',
-      //   searchQuery: this.state.searchDirectionBarState.toQuery,
-      // })
       this.selectTo(result)
     } else if (this.state.uiControllerState.status === 'inSearch') {
-      // this.devCallbackInterceptor.onSelectedChange?.(result, {
-      //   channel: 'search',
-      //   searchQuery: this.state.searchBarState.searchQuery,
-      // })
       this.selectDefaultSearchResult(result, universe)
     }
   }
@@ -734,13 +724,6 @@ export class UIControllerStore {
         draftState.searchResultListState.universes = []
         draftState.searchResultListState.currentUniverse = undefined
         draftState.searchResultListState.showCurrentLocation = undefined
-        /*if (result.objectClass === 'Placelist') {
-        draftState.bottomViewState.content = buildPlacelist(result, this.state.uiControllerState.language)
-        draftState.bottomViewState.hidden = false
-        draftState.uiControllerState.selectedContent = result
-        draftState.languageSelectorState.isHidden = true
-        draftState.universeSelectorState.isHidden = true
-      }*/
       }
     )
     const oldState = this.state
@@ -750,10 +733,6 @@ export class UIControllerStore {
     if (result.objectClass === 'Venue') {
       this.mapActionsDispatcher.centerOnVenue(result as any)
     }
-    /*if (result.objectClass === 'Placelist') {
-      this.mapActionsDispatcher.selectPlacelist(result)
-      this.mapActionsDispatcher.centerOnPlacelist(result)
-    }*/
   }
 
   public selectCurrentLocation() {
@@ -801,13 +780,6 @@ export class UIControllerStore {
       (draftState: WritableDraft<MapwizeUIState>) => {
         this.setToSelected(draftState, result)
         this.setNextDirectionStep(draftState)
-        /*if (result.objectClass === 'Placelist') {
-        draftState.bottomViewState.content = buildPlacelist(result, this.state.uiControllerState.language)
-        draftState.bottomViewState.hidden = false
-        draftState.uiControllerState.selectedContent = result
-        draftState.languageSelectorState.isHidden = true
-        draftState.universeSelectorState.isHidden = true
-      }*/
       }
     )
     const oldState = this.state
@@ -847,18 +819,12 @@ export class UIControllerStore {
           }
         }
         if (this.state.uiControllerState.selectedContent) {
-          // this.devCallbackInterceptor.onSelectedChange?.(
-          //   this.state.uiControllerState.selectedContent
-          // )
           if (
             !this.state.uiControllerState.lastExitedVenue ||
             venue._id === this.state.uiControllerState.lastExitedVenue._id
           ) {
             this.enterVenueInSelectedContent(draftState)
-            console.log(
-              'this.state.uiControllerState.selectedContent.objectClass',
-              this.state.uiControllerState.selectedContent.objectClass
-            )
+
             if (
               this.state.uiControllerState.selectedContent.objectClass ===
                 'Place' ||
@@ -924,13 +890,7 @@ export class UIControllerStore {
         if (this.state.uiControllerState.direction) {
           this.directionToExitVenue(draftState)
         } else if (this.state.uiControllerState.selectedContent) {
-          //TODO see why this is here
-          // this.directionToDefault(draftState);
           this.selectedContentToExitVenue(draftState)
-        } else {
-          //TODO see why this is here
-          // this.directionToDefault(draftState);
-          // this.searchToDefault(draftState);
         }
       }
     )
@@ -993,9 +953,7 @@ export class UIControllerStore {
     this.render(oldState, nextState)
   }
 
-  public loadUniverse(universe: Universe) {
-    // TODO
-  }
+  public loadUniverse() {}
 
   public changeUniverse(universe: Universe) {
     const nextState = produce(
@@ -1056,37 +1014,22 @@ export class UIControllerStore {
   public async externalSelectPlace(place: any): Promise<void> {
     this.selectPlace(place)
     return this.mapActionsDispatcher.centerOnPlace(place)
-    // .then(() => {
-    //   this.devCallbackInterceptor.onSelectedChange?.(place, {
-    //     channel: 'method',
-    //   })
-    // })
   }
   public async externalSelectPlacelist(placelist: any): Promise<void> {
     this.selectPlacelist(placelist)
     return this.mapActionsDispatcher.centerOnPlacelist(placelist)
-    // .then(() => {
-    //   this.devCallbackInterceptor.onSelectedChange?.(placelist, {
-    //     channel: 'method',
-    //   })
-    // })
   }
 
   public onPlaceClick(place: any) {
     if (this.state.uiControllerState.status === 'default') {
       this.selectPlace(place)
-      // this.devCallbackInterceptor.onSelectedChange?.(place, {
-      //   channel: 'click',
-      // })
     }
     if (this.state.uiControllerState.status === 'inFromSearch') {
       this.selectFrom(place)
       return
     } else if (this.state.uiControllerState.status === 'inToSearch') {
       this.selectTo(place)
-      // this.devCallbackInterceptor.onSelectedChange?.(place, {
-      //   channel: 'click',
-      // })
+
       return
     } else if (this.state.uiControllerState.status === 'inDirection') {
       return
@@ -1119,7 +1062,6 @@ export class UIControllerStore {
       this.state = nextState
       this.render(oldState, nextState)
       this.mapActionsDispatcher.unselectContent()
-      // this.devCallbackInterceptor.onSelectedChange?.(undefined)
     } else if (
       this.state.uiControllerState.status === 'inFromSearch' &&
       this.state.searchDirectionBarState.isFromFocus
@@ -1207,8 +1149,6 @@ export class UIControllerStore {
       details = await this.apiService.getPlaceDetails(
         placePreview as PlacePreview
       )
-    } else {
-      console.log('placePreview.objectClass', placePreview.objectClass)
     }
 
     const nextState = produce(
@@ -1575,7 +1515,6 @@ export class UIControllerStore {
       return
     }
     const from = this.mapActionsDispatcher.getUserLocation()
-    console.log('from', from)
     const to = navigationProp.destination
     const nextState = await produce(
       this.state,
@@ -1606,7 +1545,6 @@ export class UIControllerStore {
           )
         }
         draftState.uiControllerState.status = 'inDirection'
-        // draftState.uiControllerState.direction = direction;
         draftState.uiControllerState.directionToPoint = navigationProp.destination as any
         draftState.uiControllerState.directionMode =
           navigationProp.directionMode
@@ -1734,10 +1672,8 @@ export class UIControllerStore {
     draftState.searchResultListState.currentUniverse = undefined
     draftState.searchResultListState.showCurrentLocation = undefined
     draftState.searchDirectionBarState.isHidden = false
-    // draftState.searchDirectionBarState.isFromFocus = true
     draftState.universeSelectorState.isHidden = true
     draftState.languageSelectorState.isHidden = true
-    // draftState.uiControllerState.status = 'inFromSearch'
     if (this.mapActionsDispatcher.hasIndoorLocation()) {
       draftState.searchDirectionBarState.fromQuery = lang_current_location(
         this.state.uiControllerState.preferredLanguage
@@ -1752,8 +1688,6 @@ export class UIControllerStore {
       title && (draftState.searchDirectionBarState.toQuery = title)
       draftState.uiControllerState.directionToPoint =
         draftState.uiControllerState.selectedContent
-      // draftState.bottomViewState.hidden = true
-      // this.mapActionsDispatcher.unselectContent()
     }
     this.setNextDirectionStep(draftState)
   }
@@ -1846,4 +1780,3 @@ export class UIControllerStore {
     draftState.bottomViewState.hidden = false
   }
 }
-/*eslint-enable */

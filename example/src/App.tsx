@@ -31,8 +31,7 @@ import {
 import React, { useState } from 'react'
 import { Alert } from 'react-native'
 
-import MapwizeUI from 'mapwize-ui-react-native'
-import {
+import MapwizeUI, {
   ButtonContent,
   FormattedPlaceDetails,
   RowsContent,

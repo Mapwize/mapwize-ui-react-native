@@ -1,6 +1,15 @@
 import { Universe } from 'mapwize-sdk-react-native'
 import React from 'react'
-import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native'
+import {
+  Image,
+  Keyboard,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native'
+import icons from '../../icons'
 import { DevCallbackInterceptor } from '../../devCallbackInterceptor'
 import { SearchResult } from '../../types'
 import SearchResultItem from './searchResultItem'
@@ -56,12 +65,16 @@ const SearchResultList = ({
           ]}
         >
           {showCurrentLocation && (
-            <Text
-              style={styles.item}
+            <TouchableHighlight
+              activeOpacity={0.6}
+              underlayColor="#DDDDDD"
               onPress={() => onCurrentLocationSelected()}
             >
-              {showCurrentLocation}
-            </Text>
+              <View style={styles.currentLocationContainer}>
+                <Image style={[styles.icon]} source={icons.GEOLOC_ON} />
+                <Text style={styles.item}>{showCurrentLocation}</Text>
+              </View>
+            </TouchableHighlight>
           )}
           {buildList(results, universes, currentUniverse, onResultSelected)}
           {(!results || results?.length === 0) && (
@@ -102,7 +115,7 @@ const buildList = (
     grouped[u._id] = []
   })
   results?.forEach((r) => {
-    ;(r as any).universes.forEach((u: any) => {
+    ;(r as any).universes?.forEach((u: any) => {
       if (grouped[u._id]) {
         grouped[u._id].push(r)
       }
@@ -175,13 +188,23 @@ const styles = StyleSheet.create({
   },
   isHidden: { display: 'none' },
   isInDirectionSearch: {},
-  item: { padding: 16 },
+  item: { paddingVertical: 16, fontSize: 18, marginLeft: 24 },
   separator: {
     paddingVertical: 8,
     paddingHorizontal: 24,
     backgroundColor: '#EEEEEE',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  icon: {
+    width: 20,
+    height: 20,
+  },
+  currentLocationContainer: {
+    paddingHorizontal: 16,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 })
 

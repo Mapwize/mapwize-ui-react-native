@@ -150,7 +150,7 @@ export default class MapActionsDispatcher {
     const nextState = produce(
       this.state,
       (draftState: WritableDraft<MapwizeMapState>) => {
-        draftState.mapDirection = directionProp //TODO check that `undefined` remove direction
+        draftState.mapDirection = directionProp
       }
     )
     const oldState = this.state
