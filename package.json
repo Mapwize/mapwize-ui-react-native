@@ -68,7 +68,7 @@
     "react-native-webview": "^11.2.4",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-localize": "^2.0.2",
-    "mapwize-sdk-react-native": "^1.1.2",
+    "mapwize-sdk-react-native": "^1.1.3",
     "react-native-canvas": "^0.1.37"
   },
   "dependencies": {
@@ -82,7 +82,7 @@
     "react-native-webview": "^11.2.4",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-localize": "^2.0.2",
-    "mapwize-sdk-react-native": "^1.1.2",
+    "mapwize-sdk-react-native": "^1.1.3",
     "react-native-canvas": "^0.1.37"
   },
   "jest": {
