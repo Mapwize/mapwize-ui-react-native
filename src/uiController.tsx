@@ -99,6 +99,9 @@ export default class UIController extends React.Component<
     super(props)
     this.uiOptions = { ...defaultOptions, ...props }
     this.uiOptions.mainColor = new RGBColor(this.uiOptions.mainColor).toHex()
+    if (props.mapOptions.mainColor === undefined) {
+      props.mapOptions.mainColor = this.uiOptions.mainColor
+    }
     this.callbackInterceptor = buildCallbackInterceptor(
       props as DevCallbackInterceptor
     )
@@ -169,7 +172,6 @@ export default class UIController extends React.Component<
       <SafeAreaProvider>
         <MapwizeMap
           {...this.props}
-          mainColor={this.uiOptions.mainColor}
           style={styles.map}
           onMapLoaded={(mapwizeMap: MapwizeViewRef) => {
             this.props.onMapLoaded?.(mapwizeMap)
@@ -227,10 +229,6 @@ export default class UIController extends React.Component<
           onUniversesChange={(universes: Universe[]) => {
             this.props.onUniversesChange?.(universes)
             this.store?.changeUniverses(universes)
-          }}
-          onUniverseWillChange={(universe: Universe) => {
-            this.props.onUniverseWillChange?.(universe)
-            this.store?.loadUniverse(universe)
           }}
           onUniverseChange={(universe: Universe) => {
             this.props.onUniverseChange?.(universe)

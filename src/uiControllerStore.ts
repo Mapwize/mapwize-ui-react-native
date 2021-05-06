@@ -1,5 +1,3 @@
-/* eslint-disable eslint-comments/no-unlimited-disable */
-/* eslint-disable */
 import produce from 'immer'
 import type { WritableDraft } from 'immer/dist/internal'
 
@@ -955,7 +953,7 @@ export class UIControllerStore {
     this.render(oldState, nextState)
   }
 
-  public loadUniverse(universe: Universe) {}
+  public loadUniverse() {}
 
   public changeUniverse(universe: Universe) {
     const nextState = produce(
@@ -1782,4 +1780,3 @@ export class UIControllerStore {
     draftState.bottomViewState.hidden = false
   }
 }
-/*eslint-enable */
