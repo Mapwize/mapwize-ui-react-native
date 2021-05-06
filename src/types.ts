@@ -36,6 +36,7 @@ export interface SearchResult {
   floorLabel?: string
   cache: { '30': string }
   objectClass: 'Place' | 'Venue' | 'Placelist'
+  icon?: string
 }
 
 export interface OpeningHoursRow {
