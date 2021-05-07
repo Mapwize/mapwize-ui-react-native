@@ -16,7 +16,7 @@ export const buildFloorDisplays = (
 ): FloorDisplay[] => {
   return floors.map((f) => {
     const translation = translationForLanguage(f.translations, language)
-    return { title: translation?.title || '' + f.number, number: f.number }
+    return { title: translation?.shortTitle || '' + f.number, number: f.number }
   })
 }
 
