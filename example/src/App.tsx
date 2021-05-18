@@ -45,7 +45,6 @@ const mapOptions = new MapOptions()
   .setCenterOnVenueId(venueId)
   // .setCenterOnPlaceId(placeId)
   .setRestrictContentToVenueIds([venueId])
-  .setCompassEnabled(false)
 
 const placeStyles = [
   new PlaceStyleProp(

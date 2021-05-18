@@ -102,6 +102,7 @@ export default class UIController extends React.Component<
     if (props.mapOptions.mainColor === undefined) {
       props.mapOptions.mainColor = this.uiOptions.mainColor
     }
+    props.mapOptions.setCompassEnabled(false)
     this.callbackInterceptor = buildCallbackInterceptor(
       props as DevCallbackInterceptor
     )
