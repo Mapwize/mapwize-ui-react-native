@@ -4,6 +4,7 @@ import type {
   Translation,
   Floor as FloorSDK,
 } from 'mapwize-sdk-react-native'
+import { Component } from 'react'
 import type { DevCallbackInterceptor } from './devCallbackInterceptor'
 
 // export enum Channel {
@@ -129,4 +130,9 @@ export interface UIOptions extends MapwizeViewProps, DevCallbackInterceptor {
    * Whether to show the Floor Controller or not
    */
   floorControllerHidden?: boolean
+  /**
+   *
+   * A component to show instead of the details UI
+   */
+  customBottomView?: Component
 }

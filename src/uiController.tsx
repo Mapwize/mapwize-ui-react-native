@@ -102,7 +102,7 @@ export default class UIController extends React.Component<
     if (props.mapOptions.mainColor === undefined) {
       props.mapOptions.mainColor = this.uiOptions.mainColor
     }
-    props.mapOptions.setCompassEnabled(false)
+    props.mapOptions = { ...props.mapOptions, compassEnabled: false }
     this.callbackInterceptor = buildCallbackInterceptor(
       props as DevCallbackInterceptor
     )
@@ -253,7 +253,10 @@ export default class UIController extends React.Component<
             })
           }}
           onMapClick={(clickEvent: ClickEvent) => {
-            this.props.onMapClick?.(clickEvent)
+            const customBottomView = this.props.onMapClick?.(clickEvent)
+            if (customBottomView) {
+              return customBottomView
+            }
             switch (clickEvent.eventType) {
               case 'map_click':
                 this.store?.onMapClick({
@@ -424,6 +427,7 @@ export default class UIController extends React.Component<
           onDirectionToPlaceClick={(place: any) =>
             this.store?.selectPlaceAndGoDirection(place)
           }
+          customBottomView={this.props.customBottomView}
           uses24={this.uiOptions.uses24}
         />
       </SafeAreaProvider>

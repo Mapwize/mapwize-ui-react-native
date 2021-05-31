@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { DevCallbackInterceptor } from '../../devCallbackInterceptor'
 import BottomViewDirection, {
@@ -20,6 +20,7 @@ export interface BottomViewProps {
   reduxState: BottomViewState
   callbackInterceptor: DevCallbackInterceptor
   uses24?: boolean
+  customBottomView?: Component
   onExpandClick: () => void
   onDirectionClick: () => void
   onPhoneClick: (phoneNumber: string) => void
@@ -42,6 +43,7 @@ const BottomView = ({
   },
   callbackInterceptor,
   uses24,
+  customBottomView,
   onExpandClick,
   onDirectionClick,
   onPhoneClick,
@@ -54,6 +56,7 @@ const BottomView = ({
   return (
     <>
       <View style={[style, styles.bottomView, expanded && styles.expanded]}>
+        {customBottomView}
         {directionContent && !hidden && (
           <BottomViewDirection
             errorLabel={directionContent?.errorLabel}
