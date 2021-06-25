@@ -6709,10 +6709,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mapwize-sdk-react-native@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/mapwize-sdk-react-native/-/mapwize-sdk-react-native-1.1.4.tgz#1004cf45818b652014de6db63fcaeb21d6231f2f"
-  integrity sha512-O4mwUub3E5wkvoi8J40Jn3+8QhKXvrDv2k8NpOk8FXN0mQOnLxv/3ZBNwy8Mat7sQvyNxElPNpkB3hxzFmpMDA==
+mapwize-sdk-react-native@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/mapwize-sdk-react-native/-/mapwize-sdk-react-native-1.1.5.tgz#a93ff966786f5f4a3dc007f98d74d44f16f2728b"
+  integrity sha512-P+CXf5KRI36kv4cANkYQvgxK0V4O7WycXc6P0KW9Fb0IqF5Wdh19fOeMGN8/RtwoLSjXtb1YFgFQZtD4JkbLng==
 
 marked@^1.1.1:
   version "1.2.9"
