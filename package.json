@@ -1,6 +1,6 @@
 {
   "name": "mapwize-ui-react-native",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "description": "Fully featured and ready to use UI to add Mapwize Indoor Maps and Navigation in your React Native app.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -68,7 +68,7 @@
     "react-native-webview": "^11.2.4",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-localize": "^2.0.2",
-    "mapwize-sdk-react-native": "^1.1.4",
+    "mapwize-sdk-react-native": "^1.1.5",
     "react-native-canvas": "^0.1.37"
   },
   "dependencies": {
@@ -82,7 +82,7 @@
     "react-native-webview": "^11.2.4",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-localize": "^2.0.2",
-    "mapwize-sdk-react-native": "^1.1.4",
+    "mapwize-sdk-react-native": "^1.1.5",
     "react-native-canvas": "^0.1.37"
   },
   "jest": {
