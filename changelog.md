@@ -1,5 +1,10 @@
 # Mapwize UI for React Native Changelog
 
+
+## Version 0.0.1-alpha.4
+
+- Updating mapwize-sdk-react-native to `1.1.5` version
+
 ## Version 0.0.1-alpha.3
 
 - Updating mapwize-sdk-react-native to `1.1.4` version
